@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Settings;
 
 use Livewire\Component;
-use App\Models\SssContributionModel;
 use App\Models\SssContributionRate;
 use App\Models\HdmfContributionRate;
 use App\Models\PhicContributionRate;
@@ -13,25 +12,28 @@ class TaxContributionComponent extends Component
 {
     public function render()
     {
-        return view('livewire.settings.tax-contribution-component',[
-            'sss_contributions' => $this->sss_contribution_table,
-            'hdmf_contributions' => $this->hdmf_contribution_table,
-            'phic_contributions' => $this->phic_contribution_table,
+        return view('livewire.settings.tax-contribution-component', [
+            'sss_contributions' => $this->sssContributionTable,
+            'hdmf_contributions' => $this->hdmfContributionTable,
+            'phic_contributions' => $this->phicContributionTable,
         ]);
     }
 
     public function getSssContributionTableProperty()
     {
-        return SssContributionRate::latest()->first();
+        $contributionRate = SssContributionRate::latest()->first();
+        return $contributionRate ?? null;
     }
 
     public function getHdmfContributionTableProperty()
     {
-        return HdmfContributionRate::where('year', Carbon::now()->format('Y'))->get();
+        $contributionRates = HdmfContributionRate::where('year', Carbon::now()->format('Y'))->get();
+        return $contributionRates->isEmpty() ? null : $contributionRates;
     }
 
     public function getPhicContributionTableProperty()
     {
-        return PhicContributionRate::where('year', Carbon::now()->format('Y'))->get();
+        $contributionRates = PhicContributionRate::where('year', Carbon::now()->format('Y'))->get();
+        return $contributionRates->isEmpty() ? null : $contributionRates;
     }
 }

@@ -3,7 +3,7 @@
     <div class="h-full overflow-y-auto px-6 md:px-32">
         <div class="ml-12 md:ml-0 my-5 flex justify-between">
             <div class="text-2xl font-semibold text-stone-700">
-                Run Payroll 
+                Generate Payroll 
             </div>
             <div class="text-sm text-stone-500">
                 Pay period: 
@@ -60,7 +60,7 @@
                                                             - {{ \Carbon\Carbon::parse($range['to'])->format('m/d') }}
                                                         </div>
                                                         <div class="text-xs font-bold text-stone-700">
-                                                        ₱{{ $range['rate'] }}
+                                                        K{{ $range['rate'] }}
                                                         </div> 
                                                     </div>
                                                 @endforeach

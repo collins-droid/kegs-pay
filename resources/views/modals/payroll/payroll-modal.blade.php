@@ -39,7 +39,7 @@
                     Cancel
                 </x-forms.button-rounded-md-secondary>
                 <x-forms.button-rounded-md-primary wire:click="submitPreviousPayroll" wire:loading.attr="disabled">
-                    Run Payroll
+                    Generate Payroll
                 </x-forms.button-rounded-md-primary>
             </div>
         {{-- end modal footer --}}

@@ -3,7 +3,7 @@
     <div class="h-full overflow-y-auto">
         <div class="container px-6 mx-auto grid">
             <h2 class="my-6 text-2xl font-semibold text-stone-700">
-                Grant Loan
+                Grant Cash
             </h2>
             <div>
                 {{-- Table header --}}
@@ -26,7 +26,7 @@
                         </x-forms.button-rounded-md-secondary>
                         <x-forms.button-rounded-md-primary class="whitespace-nowrap"  onclick="modalObject.openModal('modalGrantLoan')">
                             <i class="fa-solid fa-plus"></i>
-                            <span class="hidden md:inline-flex">Grant Loan</span>
+                            <span class="hidden md:inline-flex">Grant Cash</span>
                         </x-forms.button-rounded-md-primary>
                     </div>
                 </div>
@@ -91,13 +91,13 @@
                                             @endif
                                         </td>
                                         <td class="px-4 py-3 text-xs text-right text-stone-600 font-bold hidden md:table-cell">
-                                            ₱{{ number_format($loan->installment_amount, 2, '.', ',') }}
+                                            K{{ number_format($loan->installment_amount, 2, '.', ',') }}
                                         </td>
                                         <td class="px-4 py-3 text-xs text-right text-stone-600 font-bold">
-                                            ₱{{ number_format($loan->amount, 2, '.', ',') }}
+                                            K{{ number_format($loan->amount, 2, '.', ',') }}
                                         </td>
                                         <td class="px-4 py-3 text-xs text-right text-stone-600 font-bold">
-                                            ₱{{ number_format($loan->balance, 2, '.', ',') }}
+                                            K{{ number_format($loan->balance, 2, '.', ',') }}
                                         </td>
                                         
                                     </tr>

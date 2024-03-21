@@ -131,10 +131,17 @@ class PayslipComponent extends Component
         }
 
         $label_others = $labels['earnings']['others'];
-        foreach($label_others as $other)
-        {
-            $this->others_pay += $other;
+            // Initialize $others_pay to 0
+        $this->others_pay = 0;
+
+        // Handle 'others' earnings if it's an array
+        if (isset($labels['earnings']['others']) && is_array($labels['earnings']['others'])) {
+            $label_others = $labels['earnings']['others'];
+            foreach ($label_others as $other) {
+                $this->others_pay += $other;
+            }
         }
+
 
         $this->gross_pay = $this->selected_payslip->gross_pay;
 

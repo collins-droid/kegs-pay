@@ -12,7 +12,7 @@ class ProjectService implements ProjectServiceInterface
     private ProjectRepositoryInterface $modelRepository;
 
     public function __construct(
-        ProjectRepositoryInterface $modelRepository,
+        ProjectRepositoryInterface $modelRepository
     ) {
         $this->modelRepository = $modelRepository;
     }

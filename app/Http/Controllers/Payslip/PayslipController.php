@@ -10,7 +10,7 @@ class PayslipController extends Controller
 {
     private $modelRepo;
     public function __construct(
-        PayslipRepositoryInterface $modelRepo,
+        PayslipRepositoryInterface $modelRepo
     ) {
         $this->modelRepo = $modelRepo;
     }

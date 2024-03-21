@@ -509,37 +509,38 @@ class AttendanceComponent extends Component
     }
 
     public function updateAttendanceDetails()
-    {
-        $update_attendance = Attendance::find($this->selected_details_id);
+{
+    $update_attendance = Attendance::find($this->selected_details_id);
 
-        $updated_hours = $this->modelService->getHoursAttendance($this->selected_details_date, $this->selected_details_time_in, $this->selected_details_time_out);
-        $update_attendance->regular = $updated_hours['regular'];
-        $update_attendance->late = $updated_hours['late'];
-        $update_attendance->undertime = $updated_hours['undertime'];
-        $update_attendance->overtime = $updated_hours['overtime'];
-        $update_attendance->night_differential = $updated_hours['night_differential'];
+    $updated_hours = $this->modelService->getHoursAttendance($this->selected_details_date, $this->selected_details_time_in, $this->selected_details_time_out);
+    $update_attendance->regular = $updated_hours['regular'];
+    $update_attendance->late = $updated_hours['late'];
+    $update_attendance->undertime = $updated_hours['undertime'];
+    $update_attendance->overtime = $updated_hours['overtime'];
+    $update_attendance->night_differential = $updated_hours['night_differential'];
 
-        $status = $this->selected_details_status;
-        if(Auth::user()->hasRole('administrator')) {
-            if($status == 1)
-            {
-                $date = $this->selected_details_date;
-                $status = $this->modelService->getAttendanceStatus($date, $updated_hours['late']);
-            }
-        } else {
-            $status = 4;
+    $status = $this->selected_details_status;
+    if(Auth::user()->hasRole('administrator')) {
+        if($status == 1)
+        {
+            $date = $this->selected_details_date;
+            // Pass the third argument here (assuming it's a default value)
+            $defaultValue=1;
+            $status = $this->modelService->getAttendanceStatus($date, $updated_hours['late'], $defaultValue);
         }
-        
-        $update_attendance->status = $status;
-        $update_attendance->date = $this->selected_details_date;
-        $update_attendance->time_in = $this->selected_details_time_in;
-        $update_attendance->time_out = $this->selected_details_time_out;
-        $update_attendance->project_id = $this->selected_details_project_id;
-
-        $update_attendance->save();
-        $this->emit('closeAttendanceDetailsModal');
+    } else {
+        $status = 4;
     }
+    
+    $update_attendance->status = $status;
+    $update_attendance->date = $this->selected_details_date;
+    $update_attendance->time_in = $this->selected_details_time_in;
+    $update_attendance->time_out = $this->selected_details_time_out;
+    $update_attendance->project_id = $this->selected_details_project_id;
 
+    $update_attendance->save();
+    $this->emit('closeAttendanceDetailsModal');
+}
 
     public function openAttendanceDetails($id)
     {

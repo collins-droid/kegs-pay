@@ -2,7 +2,7 @@
     {{-- Be like water. --}}
     <div class="h-full overflow-y-auto px-6 md:px-auto">
         <div class="ml-12 md:ml-0 my-5 text-2xl font-semibold text-stone-700">
-            Run Payroll
+            Generate Payroll
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-10 gap-5">
@@ -50,17 +50,17 @@
                                             </td>
                                             {{-- <td class="px-2 md:px-4 py-3 align-top">
                                                 <p class=" text-xs text-right text-stone-600 font-bold">
-                                                    ₱{{ number_format($payslip->gross_pay, 2, '.', ',') }}
+                                                    K{{ number_format($payslip->gross_pay, 2, '.', ',') }}
                                                 </p>
                                             </td>
                                             <td class="px-2 md:px-4 py-3 align-top">
                                                 <p class=" text-xs text-right text-stone-600 font-bold">
-                                                    ₱{{ number_format($payslip->deductions, 2, '.', ',') }}
+                                                    K{{ number_format($payslip->deductions, 2, '.', ',') }}
                                                 </p>
                                             </td> --}}
                                             <td class="px-2 md:px-4 py-3 align-top">
                                                 <p class=" text-xs text-right text-stone-600 font-bold">
-                                                    ₱{{ number_format($payslip->net_pay, 2, '.', ',') }}
+                                                    K{{ number_format($payslip->net_pay, 2, '.', ',') }}
                                                 </p>
                                             </td>
                                             <td class="px-2 md:px-4 py-3 align-top">
@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="flex items-center justify-center pt-4">
                                     <button wire:click="submit" class="px-4 py-1.5 text-xs font-semibold leading-5 text-white transition-colors duration-150 bg-blue-500 border border-transparent rounded-full active:bg-blue-600 hover:bg-blue-600 focus:outline-none focus:shadow-outline-purple">
-                                        Run Payroll
+                                        Generate Payroll
                                     </button>
                                 </div>
                             </div>
@@ -191,7 +191,7 @@
                                         <img src="{{ asset('storage/img/icons/handshake.png') }}" class="w-10 h-10 object-cover"/>
                                     </div>
                                     <div class="font-bold text-sm">
-                                        Run Payroll of Sub-contractual Project
+                                        Generate Payroll of Sub-contractual Project
                                     </div>
                                     <div class="text-stone-500 text-xs font-light">
                                         Calculate and process payments for employees working on subcontractual projects

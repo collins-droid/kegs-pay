@@ -322,12 +322,13 @@ class PayrollService implements PayrollServiceInterface
         // 
 
         // TOTAL HOURS VALID
-            $total_hours = 0;
+                    $total_hours = 0;
             foreach($collection['total_hours'] as $type => $data_total_hours) {
-                $type = $type;
-                if($type === 'regular' || $type === 'overtime' || $type === 'night_differential'  || $type  === 'restday' || $type === 'restday_ot') {
+                if($type === 'regular' || $type === 'overtime' || $type === 'night_differential'  || $type === 'restday' || $type === 'restday_ot') {
                     $total_hours += $data_total_hours['value'];
                 }
+            
+
             }
             if($total_hours === 0) {
                 $collection['include_in_payroll'] = false;
@@ -359,7 +360,7 @@ class PayrollService implements PayrollServiceInterface
                 'code' => $user_collection['code'],
                 'rates_range' => $user_collection['rates_range'],
                 'payroll_period_id' => $payroll_period->id,
-                // 'earnings' => $user_collection['earnings'],
+                'earnings' => $user_collection['earnings'],
                 'preview_data' => $user_collection,
                 'additional_earnings' => []
             ];
@@ -789,6 +790,7 @@ class PayrollService implements PayrollServiceInterface
             $new_collection['earning_collections']['restday'] = $restday_pay;
             $new_collection['earning_collections']['restday_ot'] = $restday_ot_pay;
             $new_collection['earning_collections']['night_differential'] = $night_differential_pay;
+            
             // dd($new_collection);
             // $user_array =  [
                 // 'user_id' => $user_id, //
@@ -825,7 +827,7 @@ class PayrollService implements PayrollServiceInterface
                 // 'deductions_collectiwon' => $deductions_collection,
                 // 'holidays_collection' => $holidays_collection,
             // ]; 
-            // kulang 3
+           
             $collection[$user_id] = $new_collection;
         }
         return $collection;

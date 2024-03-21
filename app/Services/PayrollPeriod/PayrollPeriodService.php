@@ -26,7 +26,7 @@ use App\Models\PhicContributionRate;
 use App\Models\TaxContribution;
 
 use Carbon\Carbon;
-use Helper;
+use App\Helpers\Helper;
 
 
 class PayrollPeriodService implements PayrollPeriodServiceInterface
@@ -34,7 +34,7 @@ class PayrollPeriodService implements PayrollPeriodServiceInterface
     private PayrollPeriodRepositoryInterface $modelRepository;
     private $helper;
     public function __construct(
-        PayrollPeriodRepositoryInterface $modelRepository,
+        PayrollPeriodRepositoryInterface $modelRepository
     ) {
         $this->modelRepository = $modelRepository;
         $this->helper = new Helper;
@@ -397,8 +397,8 @@ class PayrollPeriodService implements PayrollPeriodServiceInterface
                                     {
                                         $balance += $loan->installment_amount;
                                     }
-                                    // $loan->pay_next = $balance;
-                                    // $loan->save();
+                                     $loan->pay_next = $balance;
+                                     $loan->save();
                                     
                                     
                                 }
@@ -964,7 +964,7 @@ class PayrollPeriodService implements PayrollPeriodServiceInterface
 
             if($attendance->count() == 0)
             {
-                // absent ka potangina
+                
                 // only 1 day
                 $leave = Leave::where('user_id', $user_id)
                 ->where('status', 2)

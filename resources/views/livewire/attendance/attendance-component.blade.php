@@ -32,6 +32,7 @@
                                 </x-forms.button-rounded-md-secondary>
                             </div>
                         </div>
+                        
                         @if($show_excel_results == true)
                             <div class="flex my-4 justify-between">
                                 <div class="flex space-x-2 font-bold">

@@ -6,47 +6,41 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Attendance\AttendanceRequest;
 use App\Services\Attendance\AttendanceServiceInterface;
-use App\Repositories\Attendance\AttendanceRepositoryInterface;
 
 class AttendanceController extends Controller
 {
     private $modelService;
-    private $modelRepository;
 
-    public function __construct(
-        AttendanceServiceInterface $modelService,
-        AttendanceRepositoryInterface $modelRepository,
-    ) {
+    public function __construct(AttendanceServiceInterface $modelService)
+    {
         $this->modelService = $modelService;
-        $this->modelRepository = $modelRepository;
     }
 
     public function index()
     {
-        return "when i was a y oungboy";
+        // Your index method implementation here
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(AttendanceRequest $request)
     {
-        $result = $this->modelService->store($request);
-        return $result;
+        try {
+            $result = $this->modelService->store(
+                $request->input('employee_id'),
+                $request->input('date'),
+                $request->input('clock_in'),
+                $request->input('clock_out'),
+                $request->input('notes')
+            );
+            return $result; // or return a response as per your application's requirements
+        } catch (\Exception $e) {
+            // Handle any exceptions or errors gracefully
+            // For example, you can log the error and return an appropriate response
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
+
+    // Other methods like create, show, edit, update, destroy can be implemented as needed
+
 
     /**
      * Display the specified resource.

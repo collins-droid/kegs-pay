@@ -95,7 +95,7 @@
                                             <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"></path>
                                             <path d="M12 6v2m0 8v2"></path>
                                         </svg>
-                                        <span class="ml-6">Short-Term Loan</span>
+                                        <span class="ml-6">Cash Advance</span>
                                     </span>
                                     <svg
                                         class="w-4 h-4"
@@ -120,7 +120,7 @@
                                         <li class="px-12 py-1 transition-colors duration-150 hover:text-stone-900 @isset($menu) @if($menu == 'grand-loan') text-stone-500 @endif @endisset" >
                                             <a href="{{ route('loan.grand') }}">
                                                 <span class="ml-3">
-                                                    Grant Loan
+                                                    Grant Cash
                                                 </span>
                                             </a>
                                         </li>
@@ -134,7 +134,7 @@
                                         <li class="px-12 py-1 transition-colors duration-150 hover:text-stone-900 @isset($menu) @if($menu == 'loan') text-stone-500 @endif @endisset" >
                                             <a href="{{ route('loan') }}">
                                                 <span class="ml-3">
-                                                    My Loans
+                                                    My CA
                                                 </span>
                                             </a>
                                         </li>
@@ -144,13 +144,13 @@
                         @else 
                             <li class="px-4">
                                 <a href="{{ route('loan') }}" class="px-6 py-3 inline-flex items-center w-full transition-colors duration-150 hover:text-stone-500 rounded-full @isset($menu) @if($menu == 'loan') bg-stone-100 text-stone-500 @endif @endisset ">
-                                    <svg class="w-5 h-5" style=" color:@isset($menu) @if($menu == 'loan') #78716c; @endif @endisset xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-dollar" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg class="w-5 h-5" style=" color:@isset($menu) @if($menu == 'loan') #85bb65; @endif @endisset xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-dollar" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <circle cx="12" cy="12" r="9"></circle>
                                         <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"></path>
                                         <path d="M12 6v2m0 8v2"></path>
                                     </svg>
-                                    <span class="ml-6">Shert-term Loan</span>
+                                    <span class="ml-6">Cash Advance</span>
                                 </a>
                             </li>
                         @endif
@@ -193,7 +193,7 @@
                                         <li class="px-12 py-1 transition-colors duration-150 hover:text-stone-900 @isset($menu) @if($menu == 'payroll') text-stone-500 @endif @endisset" >
                                             <a href="{{ route('payroll') }}">
                                                 <span class="ml-3">
-                                                    Run Payroll
+                                                    GP
                                                 </span>
                                             </a>
                                         </li>
@@ -410,7 +410,7 @@
                                         <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"></path>
                                         <path d="M12 6v2m0 8v2"></path>
                                     </svg>
-                                    <span class="ml-6">Short-Term Loan</span>
+                                    <span class="ml-6">Cash Advance</span>
                                 </span>
                                 <svg
                                     class="w-4 h-4"
@@ -435,7 +435,7 @@
                                     <li class="px-12 py-1 transition-colors duration-150 hover:text-stone-900 @isset($menu) @if($menu == 'grand-loan') text-stone-500 @endif @endisset" >
                                         <a href="{{ route('loan.grand') }}">
                                             <span class="ml-3">
-                                                Grant Loan
+                                                Grant Cash
                                             </span>
                                         </a>
                                     </li>
@@ -449,7 +449,7 @@
                                     <li class="px-12 py-1 transition-colors duration-150 hover:text-stone-900 @isset($menu) @if($menu == 'loan') text-stone-500 @endif @endisset" >
                                         <a href="{{ route('loan') }}">
                                             <span class="ml-3">
-                                                My Loans
+                                                My CA
                                             </span>
                                         </a>
                                     </li>
@@ -465,7 +465,7 @@
                                     <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1 -1.8 -1"></path>
                                     <path d="M12 6v2m0 8v2"></path>
                                 </svg>
-                                <span class="ml-6">Short-Term Loan</span>
+                                <span class="ml-6">Cash Advance</span>
                             </a>
                         </li>
                     @endif
@@ -508,7 +508,7 @@
                                     <li class="px-12 py-1 transition-colors duration-150 hover:text-stone-900 @isset($menu) @if($menu == 'payroll') text-stone-500 @endif @endisset" >
                                         <a href="{{ route('payroll') }}">
                                             <span class="ml-3">
-                                                Run Payroll
+                                                Generate Payroll
                                             </span>
                                         </a>
                                     </li>

@@ -19,7 +19,7 @@ use App\Models\PhicContributionRate;
 use App\Models\TaxContribution;
 
 use Carbon\Carbon;
-use Helper;
+use App\Helpers\Helper;
 
 class PayrollClass {
     
@@ -27,7 +27,8 @@ class PayrollClass {
     public function payroll($data)
     {
         $raw_collection = (json_decode($data->data,true));
-
+        echo "Decoded Data:\n";
+        var_dump($raw_collection);
         $period_start = $data->period_start;
         $period_end = $data->period_end;
 
@@ -35,6 +36,9 @@ class PayrollClass {
             'period_start' => $period_start,
             'period_end' => $period_end,
         ];
+        echo "Period Start: $period_start\n";
+        echo "Period End: $period_end\n";
+        
 
         $date_range = Helper::getRangeBetweenDatesStr($period_start, $period_end);
 
@@ -59,14 +63,15 @@ class PayrollClass {
             if($user) {
 
                 // BASIC PAY
-                    // $total_days_present_or_late = Self::getTotalDaysPresentOrLate($user_id, $between_dates);
-                    // $present_pay = $total_days_present_or_late * $daily_rate;
+                   // BASIC PAY
+                    $total_days_present_or_late = Self::getTotalDaysPresentOrLate($user_id, $between_dates);
+                    $present_pay = $total_days_present_or_late * $daily_rate;
 
                     $paid_leave_hours = Self::getTotalPaidLeaveHours($user_id, $between_dates);
                     $leave_pay = $paid_leave_hours * $hourly_rate;
 
-                    // $basic_pay = $present_pay + $leave_pay;
-                    $monthly_basic_pay = $daily_rate * 261 / 12;
+                    $basic_pay = $present_pay + $leave_pay;
+                    $monthly_basic_pay=$basic_pay;
                     
                     if($payroll_period->frequency_id == 1)
                     {
@@ -346,12 +351,12 @@ class PayrollClass {
                                     {
                                         $amount_to_pay = $loan->pay_next;
                                     }
-                                    // $loan_installment = new LoanInstallment;
-                                    // $loan_installment->loan_id = $loan->id;
-                                    // $loan_installment->user_id = $user_id;
-                                    // $loan_installment->pay_date = $date;
-                                    // $loan_installment->amount = $amount_to_pay;
-                                    // $loan_installment->save();
+                                    $loan_installment = new LoanInstallment;
+                                         $loan_installment->loan_id = $loan->id;
+                                    $loan_installment->user_id = $user_id;
+                                     $loan_installment->pay_date = $date;
+                                     $loan_installment->amount = $amount_to_pay;
+                                     $loan_installment->save();
                                     
                                     $loan_change -= $amount_to_pay;
                                     // update loans table
@@ -364,8 +369,8 @@ class PayrollClass {
                                     {
                                         $balance += $loan->installment_amount;
                                     }
-                                    // $loan->pay_next = $balance;
-                                    // $loan->save();
+                                     $loan->pay_next = $balance;
+                                     $loan->save();
                                     
                                     
                                 }

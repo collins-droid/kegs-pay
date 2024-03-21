@@ -65,7 +65,7 @@
                     Installment Amount
                 </x-forms.label>
                 <div class="w-full text-sm rounded-md shadow-sm border border-gray-300 px-3 p-2">
-                    ₱ {{ number_format($selected_installment_amount, 2, '.',',')}}
+                    K {{ number_format($selected_installment_amount, 2, '.',',')}}
                 </div>
                 @error('selected_installment_amount')
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
@@ -107,7 +107,7 @@
 
 
 {{-- modal loan details --}}
-<x-modal-small id="modalGrantLoan" title="Grant Loan" wire:ignore.self>
+<x-modal-small id="modalGrantLoan" title="Grant Cash" wire:ignore.self>
     {{-- modal body --}}
     <div class="space-y-4 my-4">
         <div class="">
@@ -212,7 +212,7 @@
                     Installment Amount
                 </x-forms.label>
                 <div class="w-full text-sm rounded-md shadow-sm border border-gray-300 px-3 p-2">
-                    ₱ {{ number_format($new_installment_amount, 2, '.',',')}}
+                    K {{ number_format($new_installment_amount, 2, '.',',')}}
                 </div>
                 @error('new_installment_amount')
                     <p class="text-red-500 text-xs italic">{{ $message }}</p>

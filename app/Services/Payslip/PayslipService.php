@@ -54,15 +54,23 @@ class PayslipService implements PayslipServiceInterface
         {
             
             
-                // DEDUCTIONS
-                    $deductions_collection = $raw_data['deductions_collection'];
-                    
-                    $hdmf_loan = isset($deductions_collection['hdmf_loan']) ? $deductions_collection['hdmf_loan'] : 0;
-                    $sss_loan = isset($deductions_collection['sss_loan']) ? $deductions_collection['sss_loan'] : 0;
-                    $withholding_tax = 0;
-                    $loan = isset($deductions_collection['loan']) ? $deductions_collection['loan'] : 0;
-                // 
-
+            if (isset($raw_data['deductions_collection'])) {
+                $deductions_collection = $raw_data['deductions_collection'];
+                
+                // Access elements from $deductions_collection with error handling
+                $hdmf_loan = isset($deductions_collection['hdmf_loan']) ? $deductions_collection['hdmf_loan'] : 0;
+                $sss_loan = isset($deductions_collection['sss_loan']) ? $deductions_collection['sss_loan'] : 0;
+                $loan = isset($deductions_collection['loan']) ? $deductions_collection['loan'] : 0;
+                // Additional processing...
+            } else {
+                // Handle case when 'deductions_collection' key is not found
+                // You may want to log an error, throw an exception, or provide a default value.
+                // For now, let's initialize the variables with default values.
+                $hdmf_loan = 0;
+                $sss_loan = 0;
+                $loan = 0;
+            }
+            
 
                 // LOAN
                     if(isset($deductions_collection['loan'])) { 
@@ -237,19 +245,33 @@ class PayslipService implements PayslipServiceInterface
                         $holidays_collection = $raw_data['holidays_collection'];
                     // 
 
-                    // deductions collction
-                        $sss_to_pay = 0;
-                        $hdmf_to_pay = 0;
-                        $phic_to_pay = 0;
-                        $label_deductions_collection = $raw_data['deductions_collection'];
-                        if(array_key_exists('tax_contribution', $label_deductions_collection))
-                        {
-                            $label_tax_contributions = $label_deductions_collection['tax_contribution'];
-                            $sss_to_pay = $label_tax_contributions['sss_contribution']['ee'];
-                            $hdmf_to_pay = $label_tax_contributions['hdmf_contribution']['total_ee'];
-                            $phic_to_pay = $label_tax_contributions['phic_contribution']['total_ee'];
-                        }
-                        
+                   // deductions collection
+$sss_to_pay = 0;
+$hdmf_to_pay = 0;
+$phic_to_pay = 0;
+$label_deductions_collection = isset($raw_data['deductions_collection']) ? $raw_data['deductions_collection'] : array();
+
+// Check if 'tax_contribution' key exists in $label_deductions_collection
+if (array_key_exists('tax_contribution', $label_deductions_collection)) {
+    // Access tax contributions
+    $label_tax_contributions = $label_deductions_collection['tax_contribution'];
+
+    // Extract SSS contribution
+    if (isset($label_tax_contributions['sss_contribution']['ee'])) {
+        $sss_to_pay = $label_tax_contributions['sss_contribution']['ee'];
+    }
+
+    // Extract HDMF contribution
+    if (isset($label_tax_contributions['hdmf_contribution']['total_ee'])) {
+        $hdmf_to_pay = $label_tax_contributions['hdmf_contribution']['total_ee'];
+    }
+
+    // Extract PHIC contribution
+    if (isset($label_tax_contributions['phic_contribution']['total_ee'])) {
+        $phic_to_pay = $label_tax_contributions['phic_contribution']['total_ee'];
+    }
+}
+
                     // 
                     // dd($raw_data);
                     $label_collection = [
@@ -319,16 +341,20 @@ class PayslipService implements PayslipServiceInterface
 
 
                     // new payslip deductions
-
                     $new_payslip_deductions = PayslipDeduction::firstOrNew(['payslip_id'=>$new_payslip->id]);
                     $new_payslip_deductions->tax_sss = $tax_sss;
                     $new_payslip_deductions->tax_hdmf = $tax_hdmf;
                     $new_payslip_deductions->tax_phic = $tax_phic;
                     $new_payslip_deductions->hdmf_loan = $hdmf_loan; 
                     $new_payslip_deductions->sss_loan = $sss_loan; 
+                    
+                    // Handle 'withholding_tax' gracefully
+                    $withholding_tax = isset($withholding_tax) ? $withholding_tax : 0;
                     $new_payslip_deductions->withholding_tax = $withholding_tax; 
+                    
                     $new_payslip_deductions->loan = $loan_amount; 
                     $new_payslip_deductions->save(); 
+                    
 
 
                 // 
